@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    container_name: definex-backend
+    ports:
+      - "8086:8086"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/creditdb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
+      - SPRING_JPA_SHOW-SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT-SQL=true
+    networks:
+      - definex_net
+
+  frontend:
+    build: ../frontend
+    container_name: definex-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - definex_net
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:8086
+
+
+
+  db:
+    image: mysql:latest
+    container_name: definex-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: creditdb
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3307:3306"
+    networks:
+      - definex_net
+
+
+networks:
+  definex_net:
