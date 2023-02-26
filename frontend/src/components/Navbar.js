@@ -19,7 +19,7 @@ function Navigation() {
       const token = localStorage.getItem("token");
   
       axios
-        .delete(`/api/v1/users/delete/${userId}`, {
+        .delete(`/api/v1/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {

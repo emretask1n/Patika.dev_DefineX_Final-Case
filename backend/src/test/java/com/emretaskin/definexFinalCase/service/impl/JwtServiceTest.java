@@ -9,6 +9,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -38,6 +39,7 @@ public class JwtServiceTest {
     }
 
     @Test
+    @DisplayName("Test extract username from jwt token")
     void extractUsername() {
         String username = "john.doe";
         String token = Jwts.builder()
@@ -48,6 +50,7 @@ public class JwtServiceTest {
     }
 
     @Test
+    @DisplayName("Test extract claim from jwt token")
     void extractClaim() {
         String subject = "john.doe";
         Date expiration = new Date(System.currentTimeMillis() + 1000 * 60 * 60);
@@ -63,6 +66,7 @@ public class JwtServiceTest {
 
 
     @Test
+    @DisplayName("Test generate jwt token")
     void generateToken() {
         String username = "john.doe";
         when(userDetails.getUsername()).thenReturn(username);
@@ -72,6 +76,7 @@ public class JwtServiceTest {
     }
 
     @Test
+    @DisplayName("Test generate jwt token with extra claims")
     void generateTokenWithExtraClaims() {
         String username = "john.doe";
         Map<String, Object> extraClaims = new HashMap<>();
@@ -87,6 +92,7 @@ public class JwtServiceTest {
     }
 
     @Test
+    @DisplayName("Test is jwt token valid")
     void isTokenValid() {
         String username = "john.doe";
         when(userDetails.getUsername()).thenReturn(username);

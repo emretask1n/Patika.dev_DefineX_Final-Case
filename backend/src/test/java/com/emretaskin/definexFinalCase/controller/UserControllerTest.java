@@ -6,6 +6,7 @@ import com.emretaskin.definexFinalCase.entity.User;
 import com.emretaskin.definexFinalCase.exception.UserNotFoundException;
 import com.emretaskin.definexFinalCase.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -34,6 +35,7 @@ class UserControllerTest {
 
 
     @Test
+    @DisplayName("Test delete user successfully")
     public void testDeleteUser() {
         Long userId = 1L;
 
@@ -49,6 +51,7 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test update user successfully")
     public void testUpdateUser() {
         Long userId = 1L;
         UserInputDTO userInputDTO = new UserInputDTO();
@@ -69,6 +72,7 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Test update user failure user not found")
     public void testUpdateUser_UserNotFoundException() {
         Long userId = 1L;
         UserInputDTO userInputDTO = new UserInputDTO();

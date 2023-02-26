@@ -11,6 +11,7 @@ import com.emretaskin.definexFinalCase.exception.UserIdOrPasswordIncorrectExcept
 import com.emretaskin.definexFinalCase.repository.UserRepository;
 import com.emretaskin.definexFinalCase.service.checker.impl.IsIdNumberAlreadyInUseImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -55,6 +56,7 @@ public class AuthenticationServiceTest {
 
 
     @Test
+    @DisplayName("Test register request with valid parameters")
     void givenRegisterRequest_whenRegister_thenCreateNewUser() {
         RegisterRequest request = new RegisterRequest("123456789101", "John Doe", "password");
         User newUser = User.builder()
@@ -84,6 +86,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test
+    @DisplayName("Test successful login request")
     void givenLoginRequest_whenLogin_thenAuthenticateUser() {
         AuthenticationRequest request = new AuthenticationRequest("12345678910", "password");
         User user = User.builder()
@@ -108,6 +111,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test
+    @DisplayName("Test register failure throws id number already in use")
     void testCheck_IdNumberAlreadyInUse() {
         isIdNumberAlreadyInUse = new IsIdNumberAlreadyInUseImpl(userRepository);
 
@@ -129,6 +133,7 @@ public class AuthenticationServiceTest {
     }
 
     @Test
+    @DisplayName("Test login failure when ID Number or password is not correct")
     void givenInvalidIdNumberOrPassword_whenLogin_thenThrowUserIdOrPasswordIncorrectException() {
         AuthenticationRequest request = new AuthenticationRequest("12345678910", "password");
         when(userRepository.findByIdNumber(request.getIdNumber())).thenReturn(Optional.empty());

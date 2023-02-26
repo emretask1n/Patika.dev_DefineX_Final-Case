@@ -7,6 +7,7 @@ import com.emretaskin.definexFinalCase.entity.User;
 import com.emretaskin.definexFinalCase.exception.UserNotFoundException;
 import com.emretaskin.definexFinalCase.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,6 +49,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test delete user with valid parameters")
     void deleteUser_whenUserFound_shouldReturnUserDeletedMessage() {
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(testUser));
 
@@ -57,6 +59,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test delete user with not valid parameters throws Exception")
     void deleteUser_whenUserNotFound_shouldThrowUserNotFoundException() {
         when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -64,6 +67,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test get credit score of existing user")
     public void getCreditScore_whenUserExists_returnCreditScore() {
         when(userRepository.findByIdNumber(anyString())).thenReturn(Optional.of(testUser));
 
@@ -73,6 +77,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test get user by id number with valid id")
     public void getUserByIdNumber_whenUserExists_returnUser() {
         when(userRepository.findByIdNumber(anyString())).thenReturn(Optional.of(testUser));
 
@@ -83,6 +88,7 @@ public class UserServiceImplTest {
 
 
     @Test
+    @DisplayName("Test update user for existing user")
     void updateUser_whenUserFound_shouldReturnUserUpdatedMessage() {
         // Arrange
         Long userId = 1L;
@@ -105,6 +111,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test update user for non-existing user")
     void updateUser_whenUserNotFound_shouldThrowUserNotFoundException() {
         // Arrange
         Long userId = 1L;
@@ -116,6 +123,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test update user with null body")
     void updateUser_whenNullInputDTO_shouldThrowNullPointerException() {
         // Arrange
         Long userId = 1L;
@@ -125,6 +133,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test find existing user by id")
     void findUserById_whenUserExists_shouldReturnUser() {
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(testUser));
 
@@ -135,6 +144,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test find non-existing user by id")
     void findUserById_whenUserDoesNotExist_shouldReturnEmptyOptional() {
         when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -144,6 +154,7 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test generate credit score success")
     void generateCreditScore_shouldReturnGeneratedCreditScore() {
         int generatedCreditScore = 1200;
         when(creditScoreService.generateCreditScore()).thenReturn(generatedCreditScore);

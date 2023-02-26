@@ -73,9 +73,17 @@ class LoanFormPage extends React.Component {
       const result = response.data.result;
       const limit = response.data.limit;
       alert(`Application ${result} with limit ${limit}`);
-    } catch (error) {
+     } catch (error) {
+      if (error.response.status === 403) {
+        this.setState({ errorMessage: "Credit score is not enough" });
+        alert("Credit score is not enough");
+      } else {
         this.setState({ errorMessage: error.response.data.message });
-    }
+        alert("Credit score is not enough");
+        
+      }
+  };
+
   };
 
   render() {

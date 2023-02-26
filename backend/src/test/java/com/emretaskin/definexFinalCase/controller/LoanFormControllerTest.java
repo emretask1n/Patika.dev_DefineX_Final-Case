@@ -7,17 +7,13 @@ import com.emretaskin.definexFinalCase.dto.response.LoanResultResponse;
 import com.emretaskin.definexFinalCase.exception.InvalidLoanFormInquiryException;
 import com.emretaskin.definexFinalCase.service.impl.LoanFormServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.reactive.server.WebTestClient;
+
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +38,7 @@ class LoanFormControllerTest {
     }
 
     @Test
+    @DisplayName("Test create loan form application successfully")
     public void testCreateLoanForm() {
         LoanFormInputDTO loanFormInput = LoanFormInputDTO.builder()
                 .idNumber("123")
@@ -62,6 +59,7 @@ class LoanFormControllerTest {
     }
 
     @Test
+    @DisplayName("Test get loan form application results successfully")
     public void testGetLoanFormApplicationResults() {
         LoanFormInquiryDTO loanFormInquiryDTO = new LoanFormInquiryDTO();
         loanFormInquiryDTO.setIdNumber("123");
@@ -84,6 +82,7 @@ class LoanFormControllerTest {
     }
 
     @Test
+    @DisplayName("Test get loan form applications throws Invalid loan form Inquiry")
     public void testGetLoanFormApplicationResultsThrowsException() {
         LoanFormInquiryDTO loanFormInquiryDTO = new LoanFormInquiryDTO();
         loanFormInquiryDTO.setIdNumber("123");

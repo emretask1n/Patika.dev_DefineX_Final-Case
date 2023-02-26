@@ -11,6 +11,7 @@ import com.emretaskin.definexFinalCase.exception.CreditScoreTooLowException;
 import com.emretaskin.definexFinalCase.exception.InvalidLoanFormInquiryException;
 import com.emretaskin.definexFinalCase.exception.UserNotFoundException;
 import com.emretaskin.definexFinalCase.repository.LoanFormRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -39,6 +40,7 @@ class LoanFormServiceImplTest {
     private LoanFormServiceImpl loanFormService;
 
     @Test
+    @DisplayName("Test applying loan form with not valid ID Number")
     void applyForLoan_whenUserNotFound_shouldThrowUserNotFoundException() {
         LoanFormInputDTO loanFormInput = new LoanFormInputDTO();
         loanFormInput.setIdNumber("12345678901");
@@ -51,6 +53,7 @@ class LoanFormServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test apply for loan when credit score below 500")
     void applyForLoan_whenCreditScoreTooLow_shouldThrowCreditScoreTooLowException() {
         // Arrange
         LoanFormInputDTO loanFormInput = LoanFormInputDTO.builder()
@@ -67,6 +70,7 @@ class LoanFormServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test apply for loan when credit score is in between 500 and 1000")
     void applyForLoan_whenCreditScoreQualifiedAndDepositNotEnough_shouldReturnLoanResultResponse() {
         // Arrange
         LoanFormInputDTO loanFormInput = LoanFormInputDTO.builder()
@@ -89,6 +93,7 @@ class LoanFormServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test apply for loan with valid credit score and deposit")
     void applyForLoan_whenCreditScoreQualifiedAndDepositEnough_shouldReturnLoanResultResponse() {
         // Arrange
         LoanFormInputDTO loanFormInput = LoanFormInputDTO.builder()
@@ -111,6 +116,7 @@ class LoanFormServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test apply for loan when credit score is above 1000 and deposit")
     void applyForLoan_whenCreditScoreAbove1K_shouldReturnLoanResultResponse() {
         // Arrange
         LoanFormInputDTO loanFormInput = LoanFormInputDTO.builder()
@@ -133,6 +139,7 @@ class LoanFormServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test apply for loan when monthly income below 5000 and credit score below 1000")
     void applyForLoan_MonthlyIncomeBelow5000_whenCreditScoreQualifiedAndDepositEnough_shouldReturnLoanResultResponse() {
         // Arrange
         LoanFormInputDTO loanFormInput = LoanFormInputDTO.builder()
@@ -155,6 +162,7 @@ class LoanFormServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test apply for loan when monthly income is in between 10000 and 5000 and credit score is below 1000 ")
     void applyForLoan_MonthlyIncomeBelow10000Above5000_whenCreditScoreQualifiedAndDepositEnough_shouldReturnLoanResultResponse() {
         // Arrange
         LoanFormInputDTO loanFormInput = LoanFormInputDTO.builder()
@@ -177,6 +185,7 @@ class LoanFormServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test get loan form application results for valid parameters")
     void getLoanFormApplicationResults_shouldReturnLoanFormInquiryResponses() {
         // Given
         String idNumber = "10101010101";
@@ -221,6 +230,7 @@ class LoanFormServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test get loan form application results throws exception when parameters are not valid")
     void getLoanFormApplicationResults_whenInputInvalid_shouldThrowException() {
         LoanFormInquiryDTO loanFormInquiry = new LoanFormInquiryDTO("11111117711",Date.valueOf("1998-01-01"));
 
