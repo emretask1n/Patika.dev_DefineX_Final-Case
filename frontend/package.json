@@ -15,7 +15,8 @@
     "react-phone-number-input": "^3.2.18",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "node-sass": "^6.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
